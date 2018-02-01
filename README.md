@@ -250,6 +250,19 @@ btn.tag=0;
     return cell;
 
 }
+UITableViewCell 与周围View保持一点点距离
+//15为距离，这里加个距离
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 120+15;
+}
+自定义cell中添加如下代码
+- (void)setFrame:(CGRect)frame{
+    frame.origin.x += 15;
+    frame.origin.y += 15;
+    frame.size.height -= 15;
+    frame.size.width -= 30;
+    [super setFrame:frame];
+}
 ```
 #### TitleLabelTopAndBottomTableViewCell preview
 ![TitleLabelTopAndBottomTableViewCell](Previous/TitleLabelTopAndBottomTableViewCell.png)
@@ -268,6 +281,19 @@ btn.tag=0;
     cell.selectedBackgroundView.backgroundColor = [UIColor selectCellColor];
     return cell;
 
+}
+UITableViewCell 与周围View保持一点点距离
+//15为距离，这里加个距离
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 120+15;
+}
+自定义cell中添加如下代码
+- (void)setFrame:(CGRect)frame{
+    frame.origin.x += 15;
+    frame.origin.y += 15;
+    frame.size.height -= 15;
+    frame.size.width -= 30;
+    [super setFrame:frame];
 }
 ```
 ### ToDo:精简代码  
