@@ -1,6 +1,6 @@
 //
 //  Square3WithMultiGestureView.h
-//  iOSUIViewKit
+//  FoolsparadiseView
 //
 //  Created by foolsparadise on 19/9/2017.
 //  Copyright © 2017 github.com/foolsparadise All rights reserved.
