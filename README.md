@@ -211,7 +211,8 @@ centerAnimationView.msgShowString = @"Do some interesting things !";
 }  
   
 ```    
-### TopImage_BottomTitleLabel_ContentCenter_Button  
+### TopImage_BottomTitleLabel_ContentCenter_Button preview  
+![TopImage_BottomTitleLabel_ContentCenter_Button](Previous/TopImage_BottomTitleLabel_ContentCenter_Button.png)
 ### Usage  
 ```
 __weak typeof(self) weakSelf = self;
@@ -225,9 +226,50 @@ btn.tag=0;
     //make.size.mas_equalTo(CGSizeMake(68, 68));
     make.size.mas_equalTo(CGSizeMake(120, 120));
 }];
-[btn configureheightSpace:26 withTitle:@"bottom_label_text" withImageNamed:@"top_image_name"];
+[btn configureheightSpace:26 withTitle:@"请开始你的表演" withImageNamed:@"top_image_name"];
 ```
+#### ImageAndTitleLabelTableViewCell preview
+![ImageAndTitleLabelTableViewCell](Previous/ImageAndTitleLabelTableViewCell.png)
+#### Usage
+```
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 56;
+}
+- (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSString *cellId = @"CellId";
+    ImageAndTitleLabelTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+    if (cell == nil) {
+        cell = [[ImageAndTitleLabelTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId] ;
+    }
+    cell.preservesSuperviewLayoutMargins = false;
+    cell.separatorInset = UIEdgeInsetsZero;
+    cell.layoutMargins = UIEdgeInsetsZero;
+    [cell configWithTitle:@"yourtitletext" withTitleImageName:@"youttitleicon"];
+    cell.selectedBackgroundView = [[UIView alloc] init];
+    cell.selectedBackgroundView.backgroundColor = [UIColor selectCellColor];
+    return cell;
 
+}
+```
+#### TitleLabelTopAndBottomTableViewCell preview
+![TitleLabelTopAndBottomTableViewCell](Previous/TitleLabelTopAndBottomTableViewCell.png)
+#### Usage
+```
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 56;
+}
+- (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSString *cellId = @"CellId";
+    TitleLabelTopAndBottomTableViewCell  *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+    if (!cell)
+        cell = [[TitleLabelTopAndBottomTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellId];
+    [cell configWithTitle:@"yourtitletext" withSubTitle:@"yoursubtitletext"];
+    cell.selectedBackgroundView = [[UIView alloc] init];
+    cell.selectedBackgroundView.backgroundColor = [UIColor selectCellColor];
+    return cell;
+
+}
+```
 ### ToDo:精简代码  
 
 ### MIT  
