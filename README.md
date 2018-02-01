@@ -1,5 +1,5 @@
 # FoolsparadiseView  
-原 Repository name 是 iOSUIViewKit ，现改为 FoolsparadiseView  
+原 Repository name 是 foolsparadise/iOSUIViewKit ，现更新为 foolsparadise/FoolsparadiseView  
 
 ## Before Use , Preparation  
 - [Masonry](https://github.com/SnapKit/Masonry) or [i forked Masonry](https://github.com/foolsparadise/Masonry). Donnot worry, its same one.  
