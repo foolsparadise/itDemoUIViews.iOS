@@ -44,9 +44,9 @@ centerAlertInputView.tag = tag;
 }  
 ```      
   
-### AlertWith2ButtonView preview  
+#### AlertWith2ButtonView preview  
 ![AlertWith2ButtonView](Previous/AlertWith2ButtonView.png)  
-### Usage  
+#### Usage  
 ```  
 #import "AlertWith2ButtonView.h"  
   
@@ -80,9 +80,9 @@ centerAlertView.tag = tag;
 }  
 ```  
   
-### AnimationLoadingView preview  
+#### AnimationLoadingView preview  
 ![AnimationLoadingView](Previous/AnimationLoadingView.gif)  
-### Usage  
+#### Usage  
 ```  
 #import "AnimationLoadingView.h"  
   
@@ -99,9 +99,9 @@ centerAnimationView.msgShowString = @"Do some interesting things !";
 
 ```  
   
-### Round5WithMultiGestureView preview  
+#### Round5WithMultiGestureView preview  
 ![Round5WithMultiGestureView](Previous/Round5WithMultiGestureView.png)   
-### Usage    
+#### Usage    
 ```  
 #import "Round5WithMultiGestureView.h"  
   
@@ -137,9 +137,9 @@ centerAnimationView.msgShowString = @"Do some interesting things !";
     // ButtonTag 0:centel OK btn 1:top 2:left 3:right 4:bottom 
 }  
 ```  
-### Square3WithMultiGestureView preview  
+#### Square3WithMultiGestureView preview  
 ![Square3WithMultiGestureView](Previous/Square3WithMultiGestureView.png)  
-### Usage    
+#### Usage    
 ```  
 #import "Square3WithMultiGestureView.h"  
   
@@ -211,9 +211,9 @@ centerAnimationView.msgShowString = @"Do some interesting things !";
 }  
   
 ```    
-### TopImage_BottomTitleLabel_ContentCenter_Button preview  
+#### TopImage_BottomTitleLabel_ContentCenter_Button preview  
 ![TopImage_BottomTitleLabel_ContentCenter_Button](Previous/TopImage_BottomTitleLabel_ContentCenter_Button.png)
-### Usage  
+#### Usage  
 ```
 __weak typeof(self) weakSelf = self;
 TopImage_BottomTitleLabel_ContentCenter_Button *btn = [TopImage_BottomTitleLabel_ContentCenter_Button new];
@@ -295,10 +295,64 @@ UITableViewCell 与周围View保持一点点距离
     frame.size.width -= 30;
     [super setFrame:frame];
 }
-```
-### ToDo:精简代码  
+```  
+#### DelegateDemoView.h DelegateDemoView.m Demo for Delegate  
+```  
+//DelegateDemoView.h
+#import <UIKit/UIKit.h>
 
-### MIT  
+@protocol DelegateDemoViewDelegate <NSObject>
+
+@optional
+- (void)DelegateDemoViewDelegate:(BOOL)isOK withViewTag:(NSInteger)ViewTag;
+
+@end
+
+@interface DelegateDemoView : UIView
+
+@property (nonatomic, weak) id <DelegateDemoViewDelegate> delegate;
+
+@end
+```  
+```  
+//DelegateDemoView.m
+#import "DelegateDemoView.h"
+
+@interface DelegateDemoView ()
+
+@end
+
+@implementation DelegateDemoView
+
+/*
+ // Only override drawRect: if you perform custom drawing.
+ // An empty implementation adversely affects performance during animation.
+ - (void)drawRect:(CGRect)rect {
+ // Drawing code
+ }
+ */
+
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        [self setupUI];
+    }
+    return self;
+}
+- (void)setupUI {
+    
+    //[self.delegate DelegateDemoViewDelegate:YES withViewTag:self.tag];
+    
+}
+
+
+
+@end
+```  
+## ToDo:精简代码  
+
+## MIT  
   
 
   
