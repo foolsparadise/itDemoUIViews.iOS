@@ -391,6 +391,36 @@ UITableViewCell 与周围View保持一点点距离
     }
 }
 ```  
+#### UIImageView+Foolsparadise .h.m Category demo code
+```  
+//UIImageView+Foolsparadise.h
+#import <UIKit/UIKit.h>
+
+@interface UIImageView (Foolsparadise)
+
++ (UIImage *)imageWithNamed:(NSString *)imageName;
+
+@end
+```  
+```  
+//UIImageView+Foolsparadise.m
+#import "UIImageView+Foolsparadise.h"
+
+@implementation UIImageView (Foolsparadise)
+
++ (UIImage *)imageWithNamed:(NSString *)imageName
+{
+    UIImage *image;
+    NSString *bundleName;
+    bundleName = @"FoolsparadiseView";
+    NSString *path = [[NSBundle mainBundle] pathForResource:bundleName ofType:@"bundle"];
+    path = [path stringByAppendingPathComponent:imageName];
+    image = [UIImage imageWithContentsOfFile:path];
+    return image;
+}
+
+@end
+```  
 
 ## ToDo:精简代码  
 
