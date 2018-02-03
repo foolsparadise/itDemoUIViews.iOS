@@ -296,7 +296,7 @@ UITableViewCell 与周围View保持一点点距离
     [super setFrame:frame];
 }
 ```  
-#### DelegateDemoView.h DelegateDemoView.m Demo for Delegate  
+#### DelegateDemoView .h.m Demo for Delegate  
 ```  
 //DelegateDemoView.h
 #import <UIKit/UIKit.h>
@@ -317,13 +317,9 @@ UITableViewCell 与周围View保持一点点距离
 ```  
 //DelegateDemoView.m
 #import "DelegateDemoView.h"
-
 @interface DelegateDemoView ()
-
 @end
-
 @implementation DelegateDemoView
-
 /*
  // Only override drawRect: if you perform custom drawing.
  // An empty implementation adversely affects performance during animation.
@@ -331,7 +327,6 @@ UITableViewCell 与周围View保持一点点距离
  // Drawing code
  }
  */
-
 - (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -340,16 +335,63 @@ UITableViewCell 与周围View保持一点点距离
     }
     return self;
 }
-- (void)setupUI {
-    
+- (void)setupUI {  
     //[self.delegate DelegateDemoViewDelegate:YES withViewTag:self.tag];
     
 }
-
-
-
 @end
 ```  
+#### Block demo code
+```  
++ (void)getBlock:(void (^)(bool isOK ,NSArray<NSDictionary *> *resultArray))callback
+{
+    __block NSArray *getArray = nil;
+    dispatch_semaphore_t semaphore_getList = dispatch_semaphore_create(0);
+    dispatch_queue_t queue_getList  = dispatch_queue_create("semaphore_getList", NULL);
+    dispatch_async(queue_getList , ^(void) {
+        NSString *str = [NSString stringWithFormat:@"http://www.example.com/getList.html"];
+        NSURL *url = [NSURL URLWithString:str];
+        NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+        NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
+        [[session dataTaskWithURL:url
+                completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
+          {
+              if (error) {
+                  NSLog(@"0(%@)", error.description);
+              }
+              else {
+                  NSString *responseString = [[NSString alloc] initWithData:data  encoding:NSUTF8StringEncoding];
+                  //responseString = [DelegateDemoView replaceUnicode:responseString];
+                  NSLog(@"1(%@)", responseString);
+                  NSDictionary *string2Dic = [NSJSONSerialization JSONObjectWithData: [responseString dataUsingEncoding:NSUTF8StringEncoding]
+                                                                             options: NSJSONReadingMutableContainers
+                                                                               error: &error];
+                  // json like {"code":0,"count":0,"data":[{"id":"176"}]}
+                  NSString *tmp = [NSString stringWithFormat:@"%@",[string2Dic valueForKey:@"code"]];
+                  if ([tmp isEqualToString:@"0"]) {
+                      NSArray *getdataArr = [string2Dic valueForKey:@"data"];
+                      NSMutableArray *arr = [[NSMutableArray alloc] initWithCapacity:99];
+                      for (NSDictionary *Obj in getdataArr) {
+                          [arr addObject:Obj];
+                          NSLog(@"2(%@)", Obj);
+                      }
+                      getArray = [arr copy];
+                  }
+              }
+              dispatch_semaphore_signal(semaphore_getList);
+              
+          }] resume];
+    });
+    dispatch_semaphore_wait(semaphore_getList,DISPATCH_TIME_FOREVER);
+    if (callback) {
+        if(getArray.count==0)
+            callback(NO, getArray);
+        else
+            callback(YES, getArray);
+    }
+}
+```  
+
 ## ToDo:精简代码  
 
 ## MIT  
