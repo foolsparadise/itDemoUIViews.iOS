@@ -296,7 +296,7 @@ UITableViewCell 与周围View保持一点点距离
     [super setFrame:frame];
 }
 ```  
-#### DelegateDemoView .h.m Demo for Delegate  
+#### DelegateDemoView .h.m Demo for Delegate 使用回调  
 ```  
 //DelegateDemoView.h
 #import <UIKit/UIKit.h>
@@ -341,7 +341,7 @@ UITableViewCell 与周围View保持一点点距离
 }
 @end
 ```  
-#### Block demo code
+#### Block demo 使用block包  
 ```  
 + (void)getBlock:(void (^)(bool isOK ,NSArray<NSDictionary *> *resultArray))callback
 {
@@ -391,7 +391,7 @@ UITableViewCell 与周围View保持一点点距离
     }
 }
 ```  
-#### UIImageView+Foolsparadise .h.m Category demo code
+#### UIImageView+Foolsparadise .h.m Category demo imageWithNamed取bundle文件中图片   
 ```  
 //UIImageView+Foolsparadise.h
 #import <UIKit/UIKit.h>
@@ -421,7 +421,7 @@ UITableViewCell 与周围View保持一点点距离
 
 @end
 ```  
-#### Multi Lines UILabel demo code
+#### Multi Lines UILabel demo 多行显示的UILabel  
 ```  
 usage:  
 @property (nonatomic, strong) UILabel *MultiLinesUILabel;  
@@ -432,6 +432,8 @@ usage:
     make.top.mas_equalTo(self.view.mas_top).mas_offset(10);  
     make.height.mas_equalTo(300);  
 }];  
+```  
+```  
 code:  
 - (UILabel *)MultiLinesUILabel  
 {  
