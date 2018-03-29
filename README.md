@@ -421,6 +421,52 @@ UITableViewCell 与周围View保持一点点距离
 
 @end
 ```  
+#### Multi Lines UILabel demo code
+```  
+usage:  
+@property (nonatomic, strong) UILabel *MultiLinesUILabel;  
+[self.view addSubview:self.MultiLinesUILabel];  
+[self.MultiLinesUILabel mas_makeConstraints:^(MASConstraintMaker *make) {  
+    make.left.mas_equalTo(self.view.mas_left).mas_offset(10);  
+    make.right.mas_equalTo(self.view.mas_right).mas_offset(-10);  
+    make.top.mas_equalTo(self.view.mas_top).mas_offset(10);  
+    make.height.mas_equalTo(300);  
+}];  
+code:  
+- (UILabel *)MultiLinesUILabel  
+{  
+    if (!_MultiLinesUILabel) {  
+        #define vSCREEN_WIDTH ([UIScreen mainScreen].bounds.size.width)  
+        #define vFONT(fontSize) [UIFont fontWithName:@"STHeitiSC-Medium" size:(fontSize)]  
+        #define vRGBCOLOR(r,g,b) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1]  
+        //UIView *Labeliew = [[UIView alloc] initWithFrame:CGRectMake(10, 10, vSCREEN_WIDTH-20, 300)];  
+        UILabel *titleLable = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, vSCREEN_WIDTH-20, 300)];         
+        NSMutableParagraphStyle *paraStyle = [[NSMutableParagraphStyle alloc] init];  
+        paraStyle.lineBreakMode = NSLineBreakByWordWrapping;  
+        paraStyle.alignment = NSTextAlignmentCenter;  
+        paraStyle.lineSpacing = 6; //设置行间距  
+        paraStyle.hyphenationFactor = 1.0;  
+        paraStyle.firstLineHeadIndent = 0.0;  
+        paraStyle.paragraphSpacingBefore = 0.0;  
+        paraStyle.headIndent = 0;  
+        paraStyle.tailIndent = 0;  
+        //设置字间距 NSKernAttributeName:@1.5f  
+        NSDictionary *dic = @{NSParagraphStyleAttributeName:paraStyle};  
+        NSMutableAttributedString *attributeStr = [[NSMutableAttributedString alloc] initWithString:@"MIT Copyright , Writed by github.com/foolsparadise" attributes:dic];  
+        NSRange range = [attributeStr.string rangeOfString:@"Alert:"];  
+        [attributeStr addAttribute:NSFontAttributeName value:vFONT(16) range:NSMakeRange(range.location, range.length)];  
+        [attributeStr addAttribute:NSForegroundColorAttributeName value:vRGBCOLOR(230, 99 ,60) range:NSMakeRange(range.location, range.length)];  
+        
+        [attributeStr addAttribute:NSFontAttributeName value:vFONT(13) range:NSMakeRange(range.length,attributeStr.length - range.length)];  
+        [attributeStr addAttribute:NSForegroundColorAttributeName value:vRGBCOLOR(137, 142 ,149) range:NSMakeRange(range.length,attributeStr.length - range.length)];          
+        titleLable.attributedText = attributeStr;          
+        titleLable.textAlignment = NSTextAlignmentCenter; //字样的对齐位置  
+        titleLable.numberOfLines = 0;  
+        _MultiLinesUILabel = titleLable;  
+    }  
+    return _MultiLinesUILabel;  
+}  
+```  
 
 ## ToDo:精简代码  
 
