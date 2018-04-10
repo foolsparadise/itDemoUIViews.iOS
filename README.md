@@ -469,7 +469,63 @@ code:
     return _MultiLinesUILabel;  
 }  
 ```  
-
+#### Block Demo 嵌套，迭代，递归  
+```  
+//usage  
+dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0),  
+^{  
+//后台运行，避免卡当前ViewController  
+   __weak typeof(self)weakSelf = self;  
+   [weakSelf Block1Demo:@"1" callback:^(int result) {  
+       NSLog(@"%d", result);  
+       //if(result==BlockDemoResult0) ...  
+       //else ...  
+       [weakSelf Block2Demo:@"2" callback:^(int result) {  
+       //Block2Demo是类似于Block1Demo这样的函数  
+           NSLog(@"%d", result);  
+           if(result == BlockDemoResult0) {  
+               dispatch_async(dispatch_get_main_queue(), ^{  
+                   //do something for UI  
+               });  
+           }  
+           //else if ...  
+       }];  
+   }];  
+});  
+```  
+```  
+//enum  
+typedef enum{  
+    BlockDemoResult0 = 0,  
+    BlockDemoResult1,  
+    BlockDemoResult2  
+}BlockDemoResult;  
+//function  
+- (void)Block1Demo:(NSString *)randstr callback:(void (^)(int ret))callback  
+{  
+    __weak typeof(self) weakSelf = self;  
+    if(0) {  
+        if (callback) { callback(-1); } return;  
+    }  
+    NSString *saveUrl = [NSString stringWithFormat:@"http://www.example.com"];  
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];  
+    [manager GET:saveUrl parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {  
+        NSError *err2;  
+        //json  
+        NSDictionary *jsonDic = responseObject;//[NSJSONSerialization JSONObjectWithData: [responseObject dataUsingEncoding:NSUTF8StringEncoding] options: NSJSONReadingMutableContainers error: &err2];  
+        if (err2 != nil) {  
+            if (callback) { callback(-1); } return;  
+        }  
+        NSString *tmp1 = [NSString stringWithFormat:@"%@",[jsonDic valueForKey:@"code"]];  
+        if ([tmp1 isEqualToString:@"0"]) //0正常  
+        { NSLog(@"%@", tmp1); }  
+        if (callback) { callback(0); }  
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {  
+        if (callback) { callback(-1); }  
+    }];  
+}  
+```  
+  
 ## ToDo:精简代码  
 
 ## MIT  
