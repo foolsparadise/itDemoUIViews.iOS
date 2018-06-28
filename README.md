@@ -577,6 +577,21 @@ typedef enum{
     return nil;  
 }  
 ```  
+  
+#### 锁屏时，显示当前音乐的播放状态    
+```  
+dispatch_async(dispatch_get_main_queue(), ^{  
+                    NSMutableDictionary *playInfoDict = [NSMutableDictionary new];  
+                    UIImage *imageFromUrl = [UIImage imageNamed:@"play_musicpage"];  
+                    [playInfoDict setObject:[playInfo SongName] forKey:MPMediaItemPropertyTitle];  
+                    [playInfoDict setObject:[playInfo SingerName] forKey:MPMediaItemPropertyArtist];  
+                    [playInfoDict setObject:[NSNumber numberWithInt:(int)[playInfo.duration longTimeValue]] forKey:MPMediaItemPropertyPlaybackDuration];  
+                    [playInfoDict setObject:[NSNumber numberWithInt:(int)[playInfo.progress longTimeValue]] forKey:MPNowPlayingInfoPropertyElapsedPlaybackTime];  
+                    MPMediaItemArtwork *mArt = [[MPMediaItemArtwork alloc] initWithImage:imageFromUrl];  
+                    [playInfoDict setObject:mArt forKey:MPMediaItemPropertyArtwork];  
+                    [[MPNowPlayingInfoCenter defaultCenter] setNowPlayingInfo:playInfoDict];  
+                });  
+```  
 ## ToDo:精简代码  
 
 ## MIT  
