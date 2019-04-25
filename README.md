@@ -38,6 +38,10 @@ centerAlertInputView.tag = tag;
         //No Input  
         return;  
     }  
+    if(centerAlertInputView) {
+      [centerAlertInputView removeFromSuperview];
+      centerAlertInputView=nil;
+    }
     __weak typeof(self) weakSelf = self;  
     // ClickedTag view' tag  
     if(ClickedTag==1) { }  
@@ -72,6 +76,10 @@ centerAlertView.tag = tag;
     NSLog(@"%s click %ld %ld", __func__, (long)ClickedTag, (long)ButtonTag);  
     __weak typeof(self) weakSelf = self;  
     // ClickedTag view' tag  
+    if(centerAlertView) {
+      [centerAlertView removeFromSuperview];
+      centerAlertView=nil;
+    }
     // ButtonTag 1:left 2:right  
     if(ClickedTag==1) {  
         if(ButtonTag==1) { }  
