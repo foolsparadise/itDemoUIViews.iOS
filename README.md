@@ -105,7 +105,45 @@ centerAnimationView.msgShowString = @"Do some interesting things !";
 }];  
 
 ```  
-  
+
+#### Slider1View preview  
+![Slider1View](Previous/Slider1View.png)   
+#### Usage    
+```
+#import "Slider1View.h"
+<Slider1ViewDelegate>
+
+Slider1View *centerSliderView;
+centerSliderView = [[Slider1View alloc] initWithFrame:CGRectMake(0, SCREEN_WIDTH, [UIScreen mainScreen].bounds.size.width, 140)];
+        centerSliderView.titleAlertString = @"划动改变Value";
+        centerSliderView.rightButtonString = @"完成";
+        centerSliderView.minValue=@"0";
+        centerSliderView.maxValue=@"100";
+        centerSliderView.currentValue=@"0";
+        centerSliderView.delegate = self;
+        centerSliderView.tag = 100;
+        [self.contentView addSubview:centerSliderView];
+        [centerSliderView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.bottom.mas_equalTo(self.view.mas_bottom).mas_offset(0);
+            make.left.mas_equalTo(self.view.mas_left).mas_offset(0);
+            make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 140));
+        }];
+- (void)Slider1ViewValueDelegate:(NSInteger)ClickedTag withValueString:(NSString *)valueString
+{
+    __weak typeof(self) weakSelf = self;
+    if(ClickedTag==100) {
+
+    }
+}
+- (void)Slider1ViewOKDelegate:(NSInteger)ClickedTag
+{
+    if(centerSliderView) {
+        [centerSliderView removeFromSuperview];
+        centerSliderView = nil;
+    }
+}        
+```
+
 #### Round5WithMultiGestureView preview  
 ![Round5WithMultiGestureView](Previous/Round5WithMultiGestureView.png)   
 #### Usage    
