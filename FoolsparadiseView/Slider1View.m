@@ -161,6 +161,8 @@
 - (void)click_Button:(UIButton *)btn
 {
     NSInteger tagg = (long)btn.tag;
-    [self.delegate Slider1ViewOKDelegate:tagg];
+    if(tagg>0) {
+        [self.delegate Slider1ViewOKDelegate:tagg];
+    }
 }
 @end
