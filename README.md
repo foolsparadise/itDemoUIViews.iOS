@@ -7,6 +7,25 @@
 ## Howto  
 import DemoViews.h and use...  
 
+#### Show1PickerView preview  
+![Show1PickerView](Previous/Show1PickerView.png)  
+#### Usage  
+```  
+#import "Show1PickerView.h"
+<Show1PickerViewDelegate>
+NSArray *arr = [[NSArray alloc] initWithObjects:@"男",@"女", nil];
+NSString *str = @"男";
+Show1PickerView *picker = [[Show1PickerView alloc] initShow1PickerViewDWithArray:arr WithDefaultObj:str];
+picker.tag=1;
+picker.delegate = self;
+[picker show];
+-(void)Show1PickerViewDelegateDidSelected:(NSString *)SelectedString withTag:(NSInteger)tagg
+{
+NSLog(@"%@ %d", SelectedString, tagg);
+if(tagg == 1) { }
+}
+```
+
 #### AlertWith1inputTextFieldView preview  
 ![AlertWith1inputTextFieldView](Previous/AlertWith1inputTextFieldView.png)  
 #### Usage  
