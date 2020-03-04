@@ -656,6 +656,26 @@ dispatch_async(dispatch_get_main_queue(), ^{
                     [[MPNowPlayingInfoCenter defaultCenter] setNowPlayingInfo:playInfoDict];  
                 });  
 ```  
+
+#### HTTPS请求
+```
+NSString *URLString = @"http://example.com";
+NSDictionary *parameters = @{@"foo": @"bar", @"baz": @[@1, @2, @3]};
+AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+AFSecurityPolicy *securityPolicy = [AFSecurityPolicy defaultPolicy];
+securityPolicy.validatesDomainName = NO;
+securityPolicy.allowInvalidCertificates = YES;
+manager.securityPolicy = securityPolicy;
+manager.responseSerializer.acceptableContentTypes=  [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html", nil];
+[manager POST:URLString parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
+    
+} success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    
+} failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+    
+}];
+```    
+
 ## ToDo:精简代码  
 
 ## MIT  
